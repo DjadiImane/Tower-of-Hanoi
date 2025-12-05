@@ -166,9 +166,9 @@ else{
 
     // Fin du chronométrage et calcul du temps en millisecondes
     clock_t end = clock();
-    double exec_time = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+    double exec_time = (double)(end - start) / CLOCKS_PER_SEC;
 
-    printf("\nTemps d'execution : %.2f ms\n", exec_time);
+    printf("\nTemps d'execution : %f s\n", exec_time);
     printf("Nombre total de mouvements effectues : %lld\n", moves);
     printf("-------------------------------------------------\n");
     // -----------------------------------------------------
@@ -181,3 +181,4 @@ else{
    }while(n!=0);
     return 0;
 }
+
