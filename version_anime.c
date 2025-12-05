@@ -14,16 +14,8 @@ void setColor(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
-// Effacer ecran
-void effacer() {
-printf("\x1b[2J\x1b[H");
-   }
-
-
 // Affichage des piquets et disques
  void afficher() {
-   effacer();
-
     for (int level = n - 1; level >= 0; level--) {//parcourire chaque niveau du haut vers le bas
         for (int p = 0; p < 3; p++) {//Pour chaque level on parcourt les 3 piquets p = 0,1,2 (A,B,C)
 
@@ -84,20 +76,20 @@ printf("\x1b[2J\x1b[H");
 }
 
 //ajouter un disque disk sur le haut de la pile.
-void push(int pile, int disk) {
+void ajouter(int pile, int disk) {
     piles[pile][hauteur[pile]] = disk;
     hauteur[pile]++;
 }
 //retirer et retourner le disque du haut de la pile pile.
-int pop(int pile) {
+int retirer(int pile) {
     hauteur[pile]--;
     return piles[pile][hauteur[pile]];
 }
 
 // Mouvement disque + affichage
 void deplacer(int from, int to) {
-    int disk = pop(from);
-    push(to, disk);
+    int disk = retirer(from);
+    ajouter(to, disk);
     afficher();
 }
 
@@ -113,7 +105,6 @@ void hanoi(int nb, int A, int C, int B) {
 
 // Programme principal
 int main() {
- // activer ANSI pour couleurs
     do {
         printf("Entrez le nombre de disques (0 pour quitter) : ");
          // <-- utilise la variable globale n
@@ -141,7 +132,7 @@ int main() {
         }
 
         // Remplir la pile A
-        for (int i = n; i >= 1; i--) push(0, i);
+        for (int i = n; i >= 1; i--) ajouter(0, i);
 
         nbmoves = 0;
         afficher();
